@@ -11,6 +11,11 @@ const GameProvider = ({ children }) => {
   function handleClick(squareIndex) {
     console.log('squareIndex', squareIndex);
 
+    //if game is inactive (win or draw) then return
+    if (active === false) {
+      return;
+    }
+
     //if the value of div clicked is a string, means it's already clicked
     if (typeof board[squareIndex] === 'string') {
       return;
@@ -26,11 +31,7 @@ const GameProvider = ({ children }) => {
       setCurrentPlayer('X');
     }
 
-    // console.log('click');
-    //check if game is active, return if false
     //update game message if active is false
-    //setboard by inserting current player value into index
-    //setPlayer to OTHER player
   }
 
   return (
