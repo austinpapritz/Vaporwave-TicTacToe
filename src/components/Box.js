@@ -1,7 +1,5 @@
-import React from 'react'
+import React from 'react';
 
 export default function Box() {
-  return (
-    <div>Box</div>
-  )
+  return <div>Box</div>;
 }
