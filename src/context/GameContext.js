@@ -10,6 +10,12 @@ const GameProvider = ({ children }) => {
 
   function handleClick(squareIndex) {
     console.log('squareIndex', squareIndex);
+
+    //if the value of div clicked is a string, means it's already clicked
+    if (typeof board[squareIndex] === 'string') {
+      return;
+    }
+
     board[squareIndex] = currentplayer;
     console.log('board', board);
     setBoard(board);
