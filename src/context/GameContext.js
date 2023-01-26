@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
-
+import { useGame } from '../hooks/useGame.js';
 const GameContext = createContext();
 
 const GameProvider = ({ children }) => {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const { board, setBoard } = useGame();
   const [currentplayer, setCurrentPlayer] = useState('X');
   const [gamemessage, setGameMessage] = useState('');
   const [active, setActive] = useState(true);
@@ -13,6 +13,13 @@ const GameProvider = ({ children }) => {
     board[squareIndex] = currentplayer;
     console.log('board', board);
     setBoard(board);
+
+    if (currentplayer === 'X') {
+      setCurrentPlayer('O');
+    } else if (currentplayer === 'O') {
+      setCurrentPlayer('X');
+    }
+
     // console.log('click');
     //check if game is active, return if false
     //update game message if active is false
