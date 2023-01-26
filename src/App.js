@@ -7,12 +7,12 @@ import { GameContext } from './context/GameContext.js';
 function App() {
   const { gamemessage, currentplayer } = useContext(GameContext);
 
-  console.log('gamemessage', gamemessage);
-  console.log('currentplayer', currentplayer);
-
   return (
     <div className="App">
       <div className="alpha-container">
+        <h1>Tic Tac Toe</h1>
+        <h2>{gamemessage}</h2>
+        <h2>Current player: {currentplayer}</h2>
         <Board />
       </div>
     </div>

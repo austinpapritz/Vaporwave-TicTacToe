@@ -4,6 +4,18 @@
   background: url('../public/background.jpg');
 }
 
+.App h1 {
+  font-size: 3rem;
+  color: rgb(249, 200, 239);
+  line-height: 0;
+}
+
+.App h2 {
+  font-size: 2rem;
+  color: rgb(249, 200, 239);
+  line-height: 0;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,6 +54,7 @@
 .alpha-container {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
