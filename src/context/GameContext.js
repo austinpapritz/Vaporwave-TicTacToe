@@ -9,8 +9,10 @@ const GameProvider = ({ children }) => {
   const [active, setActive] = useState(true);
 
   function handleClick(squareIndex) {
+    console.log('squareIndex', squareIndex);
     board[squareIndex] = currentplayer;
-    console.log('board[squareIndex]', board[squareIndex]);
+    console.log('board', board);
+    setBoard(board);
     // console.log('click');
     //check if game is active, return if false
     //update game message if active is false
