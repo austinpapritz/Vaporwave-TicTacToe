@@ -4,22 +4,12 @@ const GameContext = createContext();
 import winningCombos from '../game-data.js';
 
 const GameProvider = ({ children }) => {
-  //   const { board, setBoard } = useGame();
-  //   const { active, setActive } = useGame();
   const [active, setActive] = useState(true);
   const [board, setBoard] = useState(Array(9).fill(null));
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [gameMessage, setGameMessage] = useState('');
 
   function handleClick(squareIndex) {
-    //make xIndice array which includes (index + 1).join('') of every X position
-    // const xIndice = [];
-
-    // for (let i = 0; i < board.length; i++) {
-    //   board[i].indexOf('X');
-    // }
-    //if winningCombos.map((combo) => xIndice.includes(combo) then setActive(false)
-
     //if game is inactive (win or draw) then return
     if (active === false) {
       return;
@@ -32,8 +22,49 @@ const GameProvider = ({ children }) => {
 
     //insert the currentplayer value in the the index of the clicked square
     board[squareIndex] = currentPlayer;
-
+    //setBoard to updated board
     setBoard(board);
+
+    //CHECK IF WIN
+    //retrieves the SQUARE NUMBER of every position X or O lives
+    function getIndicesOf(searchStr, str) {
+      let searchStrLen = searchStr.length;
+      if (searchStrLen === 0) {
+        return [];
+      }
+      let startIndex = 0,
+        index,
+        indices = [];
+
+      while ((index = str.indexOf(searchStr, startIndex)) > -1) {
+        indices.push(index + 1);
+        startIndex = index + searchStrLen;
+      }
+      return indices;
+    }
+
+    //arrays of the square-position of x and o are join() into
+    let xIndices = getIndicesOf('X', board).join('');
+    let oIndices = getIndicesOf('O', board).join('');
+
+    console.log('xIndices', xIndices);
+
+    //loop winningCombos, for every combo, search x and o indices, if true then setActive(false)
+    function checkWinner() {
+      for (let i = 0; i < winningCombos.length - 1; i++) {
+        if (xIndices.indexOf(winningCombos[i]) !== -1) {
+          setActive(false);
+          console.log('x wins!');
+        }
+
+        if (oIndices.indexOf(winningCombos[i]) !== -1) {
+          setActive(false);
+          console.log('o wins!');
+        }
+      }
+    }
+
+    checkWinner();
 
     //check if tie or win to set active false
     function checkIfWinOrTie() {
