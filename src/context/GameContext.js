@@ -8,12 +8,14 @@ const GameProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [gameMessage, setGameMessage] = useState('');
 
+  //if user presses New Game button, then reset everything to restart
   function handleResetGame() {
     setActive(true);
     setBoard(Array(9).fill(null));
     setCurrentPlayer('X');
     setGameMessage('');
   }
+
   function handleClick(squareIndex) {
     //if game is inactive (win or draw) then return
     if (active === false) {
