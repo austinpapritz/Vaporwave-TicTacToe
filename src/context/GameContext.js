@@ -9,6 +9,12 @@ const GameProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [gameMessage, setGameMessage] = useState('');
 
+  function handleResetGame() {
+    setActive(true);
+    setBoard(Array(9).fill(null));
+    setCurrentPlayer('X');
+    setGameMessage('');
+  }
   function handleClick(squareIndex) {
     //if game is inactive (win or draw) then return
     if (active === false) {
@@ -44,6 +50,7 @@ const GameProvider = ({ children }) => {
     }
 
     //arrays of the square-position of x and o are join() into
+    //this string of positions will be compared to all the winning combos
     let xIndices = getIndicesOf('X', board).join('');
     let oIndices = getIndicesOf('O', board).join('');
 
@@ -66,9 +73,9 @@ const GameProvider = ({ children }) => {
       }
     }
     checkWinner();
-    console.log('active', active);
 
-    //check if tie or win to set active false
+    //IF GAME ENDS IN TIE
+    //if there does not exist a null item in the board array then GAME OVER
     function checkIfWinOrTie() {
       if (!board.some((a) => a === null)) {
         setActive(false);
@@ -79,14 +86,12 @@ const GameProvider = ({ children }) => {
     }
     checkIfWinOrTie();
 
-    //switch players
+    //switch players, assuming it is not a win or tie already
     if (currentPlayer === 'X') {
       setCurrentPlayer('O');
     } else if (currentPlayer === 'O') {
       setCurrentPlayer('X');
     }
-
-    //update game message if active is false
   }
 
   return (
@@ -101,6 +106,7 @@ const GameProvider = ({ children }) => {
         gameMessage,
         setGameMessage,
         handleClick,
+        handleResetGame,
       }}
     >
       {children}

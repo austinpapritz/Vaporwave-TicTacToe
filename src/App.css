@@ -1,6 +1,6 @@
 .App {
+  display: grid;
   height: 100vh;
-  text-align: center;
   background: url('../public/background.jpg');
 }
 
@@ -64,6 +64,7 @@
   height: 600px;
   width: 600px;
   gap: 10px;
+  margin-bottom: 70px;
 }
 
 .square {
@@ -76,4 +77,16 @@
   color: aquamarine;
   font-size: 6rem;
   border-radius: 0.5rem;
+}
+
+.reset-btn {
+  height: 50px;
+  background: rgb(48, 1, 101);
+  color: palevioletred;
+  font-size: 2rem;
+}
+
+.reset-btn:hover {
+  background: aquamarine;
+  cursor: pointer;
 }

@@ -5,10 +5,13 @@ import Board from './components/Board.js';
 import { GameContext } from './context/GameContext.js';
 
 function App() {
-  const { gameMessage, currentPlayer } = useContext(GameContext);
+  const { gameMessage, currentPlayer, handleResetGame } = useContext(GameContext);
 
   return (
     <div className="App">
+      <button className="reset-btn" onClick={handleResetGame}>
+        New Game
+      </button>
       <div className="alpha-container">
         <h1>Tic Tac Toe</h1>
         <h2>{gameMessage}</h2>
