@@ -21,10 +21,26 @@ const GameProvider = ({ children }) => {
       return;
     }
 
+    //insert the currentplayer value in the the index of the clicked square
     board[squareIndex] = currentplayer;
     console.log('board', board);
     setBoard(board);
 
+    //check if cats game or win to set active false
+    function checkIfWinOrTie() {
+      if (board.some((a) => a === null)) {
+        setActive(true);
+        return true;
+      } else {
+        setActive(false);
+        return false;
+      }
+    }
+
+    checkIfWinOrTie();
+    console.log('check if tie', checkIfWinOrTie());
+
+    //switch players
     if (currentplayer === 'X') {
       setCurrentPlayer('O');
     } else if (currentplayer === 'O') {
