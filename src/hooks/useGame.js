@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
-export function useGame() {
-  const [board, setBoard] = useState(Array(9).fill(null));
+// export function useGame() {
+//   const [board, setBoard] = useState(Array(9).fill(null));
+//   const [active, setActive] = useState(true);
 
-  useEffect(() => {}, [board, setBoard]);
-  return { board, setBoard };
-}
+//   useEffect(() => {}, [board, setBoard, active, setActive]);
+//   return { board, setBoard };
+// }

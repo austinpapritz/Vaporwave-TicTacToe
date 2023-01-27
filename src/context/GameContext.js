@@ -1,15 +1,24 @@
 import { createContext, useState } from 'react';
-import { useGame } from '../hooks/useGame.js';
+// import { useGame } from '../hooks/useGame.js';
 const GameContext = createContext();
+import winningCombos from '../game-data.js';
 
 const GameProvider = ({ children }) => {
-  const { board, setBoard } = useGame();
-  const [currentplayer, setCurrentPlayer] = useState('X');
-  const [gamemessage, setGameMessage] = useState('');
+  //   const { board, setBoard } = useGame();
+  //   const { active, setActive } = useGame();
   const [active, setActive] = useState(true);
+  const [board, setBoard] = useState(Array(9).fill(null));
+  const [currentPlayer, setCurrentPlayer] = useState('X');
+  const [gameMessage, setGameMessage] = useState('');
 
   function handleClick(squareIndex) {
-    console.log('squareIndex', squareIndex);
+    //make xIndice array which includes (index + 1).join('') of every X position
+    // const xIndice = [];
+
+    // for (let i = 0; i < board.length; i++) {
+    //   board[i].indexOf('X');
+    // }
+    //if winningCombos.map((combo) => xIndice.includes(combo) then setActive(false)
 
     //if game is inactive (win or draw) then return
     if (active === false) {
@@ -22,28 +31,24 @@ const GameProvider = ({ children }) => {
     }
 
     //insert the currentplayer value in the the index of the clicked square
-    board[squareIndex] = currentplayer;
-    console.log('board', board);
+    board[squareIndex] = currentPlayer;
+
     setBoard(board);
 
-    //check if cats game or win to set active false
+    //check if tie or win to set active false
     function checkIfWinOrTie() {
       if (board.some((a) => a === null)) {
         setActive(true);
-        return true;
       } else {
         setActive(false);
-        return false;
       }
     }
-
     checkIfWinOrTie();
-    console.log('check if tie', checkIfWinOrTie());
 
     //switch players
-    if (currentplayer === 'X') {
+    if (currentPlayer === 'X') {
       setCurrentPlayer('O');
-    } else if (currentplayer === 'O') {
+    } else if (currentPlayer === 'O') {
       setCurrentPlayer('X');
     }
 
@@ -57,9 +62,9 @@ const GameProvider = ({ children }) => {
         setActive,
         board,
         setBoard,
-        currentplayer,
+        currentPlayer,
         setCurrentPlayer,
-        gamemessage,
+        gameMessage,
         setGameMessage,
         handleClick,
       }}
