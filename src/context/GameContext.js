@@ -47,31 +47,34 @@ const GameProvider = ({ children }) => {
     let xIndices = getIndicesOf('X', board).join('');
     let oIndices = getIndicesOf('O', board).join('');
 
-    console.log('xIndices', xIndices);
-
     //loop winningCombos, for every combo, search x and o indices, if true then setActive(false)
     function checkWinner() {
       for (let i = 0; i < winningCombos.length - 1; i++) {
         if (xIndices.indexOf(winningCombos[i]) !== -1) {
           setActive(false);
-          console.log('x wins!');
+          setGameMessage('X Wins!');
+          setCurrentPlayer('GAME OVER');
+          return;
         }
 
         if (oIndices.indexOf(winningCombos[i]) !== -1) {
           setActive(false);
-          console.log('o wins!');
+          setGameMessage('O Wins!');
+          setCurrentPlayer('GAME OVER');
+          return;
         }
       }
     }
-
     checkWinner();
+    console.log('active', active);
 
     //check if tie or win to set active false
     function checkIfWinOrTie() {
-      if (board.some((a) => a === null)) {
-        setActive(true);
-      } else {
+      if (!board.some((a) => a === null)) {
         setActive(false);
+        setGameMessage('IT IS A TIE');
+        setCurrentPlayer('GAME OVER');
+        return;
       }
     }
     checkIfWinOrTie();
