@@ -35,11 +35,12 @@ const GameProvider = ({ children }) => {
     //CHECK IF TIE
     //if there does not exist a null item in the board array then GAME OVER
     function checkIfTie() {
-      if (!board.some((a) => a === null)) {
-        setActive(false);
-        setGameMessage('IT IS A TIE');
-        setCurrentPlayer('GAME OVER');
-        return;
+      if (active) {
+        if (!board.some((a) => a === null)) {
+          setGameMessage('IT IS A TIE');
+          setCurrentPlayer('GAME OVER');
+          setActive(false);
+        }
       }
     }
 
@@ -82,10 +83,12 @@ const GameProvider = ({ children }) => {
           setGameMessage('X Wins!');
           setCurrentPlayer('GAME OVER');
           setActive(false);
+          return;
         } else if (oIndices.indexOf(winningCombos[i]) !== -1) {
           setGameMessage('O Wins!');
           setCurrentPlayer('GAME OVER');
           setActive(false);
+          return;
         } else {
           if (!active) return;
           checkIfTie();
