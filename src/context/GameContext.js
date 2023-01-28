@@ -37,8 +37,8 @@ const GameProvider = ({ children }) => {
     function checkIfTie() {
       if (active) {
         if (!board.some((a) => a === null)) {
-          setGameMessage('IT IS A TIE');
-          setCurrentPlayer('GAME OVER');
+          setGameMessage('GAME OVER');
+          setCurrentPlayer('TIE GAME');
           setActive(false);
         }
       }
@@ -80,13 +80,13 @@ const GameProvider = ({ children }) => {
     function checkWinner() {
       for (let i = 0; i < winningCombos.length - 1; i++) {
         if (xIndices.indexOf(winningCombos[i]) !== -1) {
-          setGameMessage('X Wins!');
-          setCurrentPlayer('GAME OVER');
+          setGameMessage('GAME OVER');
+          setCurrentPlayer('X WINS!');
           setActive(false);
           return;
         } else if (oIndices.indexOf(winningCombos[i]) !== -1) {
-          setGameMessage('O Wins!');
-          setCurrentPlayer('GAME OVER');
+          setGameMessage('GAME OVER');
+          setCurrentPlayer('O WINS!');
           setActive(false);
           return;
         } else {
