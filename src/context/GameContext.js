@@ -32,6 +32,17 @@ const GameProvider = ({ children }) => {
     //setBoard to updated board
     setBoard(board);
 
+    //CHECK IF TIE
+    //if there does not exist a null item in the board array then GAME OVER
+    function checkIfTie() {
+      if (!board.some((a) => a === null)) {
+        setActive(false);
+        setGameMessage('IT IS A TIE');
+        setCurrentPlayer('GAME OVER');
+        return;
+      }
+    }
+
     //CHECK IF WIN
     //retrieves the SQUARE NUMBER of every position X or O lives
     function getIndicesOf(searchStr, str) {
@@ -63,35 +74,27 @@ const GameProvider = ({ children }) => {
           setGameMessage('X Wins!');
           setCurrentPlayer('GAME OVER');
           return;
-        }
-
-        if (oIndices.indexOf(winningCombos[i]) !== -1) {
+        } else if (oIndices.indexOf(winningCombos[i]) !== -1) {
           setActive(false);
           setGameMessage('O Wins!');
           setCurrentPlayer('GAME OVER');
           return;
+        } else {
+          if (!active) return;
+          checkIfTie();
         }
       }
     }
+
     checkWinner();
 
-    //IF GAME ENDS IN TIE
-    //if there does not exist a null item in the board array then GAME OVER
-    function checkIfWinOrTie() {
-      if (!board.some((a) => a === null)) {
-        setActive(false);
-        setGameMessage('IT IS A TIE');
-        setCurrentPlayer('GAME OVER');
-        return;
-      }
-    }
-    checkIfWinOrTie();
-
     //switch players, assuming it is not a win or tie already
-    if (currentPlayer === 'X') {
-      setCurrentPlayer('O');
-    } else if (currentPlayer === 'O') {
-      setCurrentPlayer('X');
+    if (active) {
+      if (currentPlayer === 'X') {
+        setCurrentPlayer('O');
+      } else if (currentPlayer === 'O') {
+        setCurrentPlayer('X');
+      }
     }
   }
 
