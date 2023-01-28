@@ -43,6 +43,15 @@ const GameProvider = ({ children }) => {
       }
     }
 
+    //switch players, assuming it is not a win or tie already
+    if (active) {
+      if (currentPlayer === 'X') {
+        setCurrentPlayer('O');
+      } else if (currentPlayer === 'O') {
+        setCurrentPlayer('X');
+      }
+    }
+
     //CHECK IF WIN
     //retrieves the SQUARE NUMBER of every position X or O lives
     function getIndicesOf(searchStr, str) {
@@ -70,15 +79,13 @@ const GameProvider = ({ children }) => {
     function checkWinner() {
       for (let i = 0; i < winningCombos.length - 1; i++) {
         if (xIndices.indexOf(winningCombos[i]) !== -1) {
-          setActive(false);
           setGameMessage('X Wins!');
           setCurrentPlayer('GAME OVER');
-          return;
-        } else if (oIndices.indexOf(winningCombos[i]) !== -1) {
           setActive(false);
+        } else if (oIndices.indexOf(winningCombos[i]) !== -1) {
           setGameMessage('O Wins!');
           setCurrentPlayer('GAME OVER');
-          return;
+          setActive(false);
         } else {
           if (!active) return;
           checkIfTie();
@@ -87,15 +94,6 @@ const GameProvider = ({ children }) => {
     }
 
     checkWinner();
-
-    //switch players, assuming it is not a win or tie already
-    if (active) {
-      if (currentPlayer === 'X') {
-        setCurrentPlayer('O');
-      } else if (currentPlayer === 'O') {
-        setCurrentPlayer('X');
-      }
-    }
   }
 
   return (
