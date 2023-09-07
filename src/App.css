@@ -1,5 +1,19 @@
 .App {
-  text-align: center;
+  display: grid;
+  height: 100vh;
+  background: url('../public/background.jpg');
+}
+
+.App h1 {
+  font-size: 3rem;
+  color: rgb(249, 200, 239);
+  line-height: 0;
+}
+
+.App h2 {
+  font-size: 2rem;
+  color: rgb(249, 200, 239);
+  line-height: 0;
 }
 
 .App-logo {
@@ -35,4 +49,44 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.alpha-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.board {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  height: 600px;
+  width: 600px;
+  gap: 10px;
+  margin-bottom: 100px;
+}
+
+.square {
+  border: double rgb(249, 200, 239) 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: palevioletred;
+  color: aquamarine;
+  font-size: 6rem;
+  border-radius: 0.5rem;
+}
+
+.reset-btn {
+  height: 50px;
+  background: rgb(48, 1, 101);
+  color: palevioletred;
+  font-size: 2rem;
+}
+
+.reset-btn:hover {
+  background: aquamarine;
+  cursor: pointer;
 }

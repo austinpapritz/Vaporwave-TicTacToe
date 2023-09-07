@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import { useContext } from 'react';
 import './App.css';
 
+import Board from './components/Board.js';
+import { GameContext } from './context/GameContext.js';
+
 function App() {
+  const { gameMessage, currentPlayer, handleResetGame } = useContext(GameContext);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button className="reset-btn" onClick={handleResetGame}>
+        New Game
+      </button>
+      <div className="alpha-container">
+        <h1>Tic Tac Toe</h1>
+        <h2>{gameMessage}</h2>
+        <h2>Current player: {currentPlayer}</h2>
+        <Board />
+      </div>
     </div>
   );
 }
